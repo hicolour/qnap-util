@@ -4,13 +4,14 @@ movies="/share/Movies/movies-new"
 
 FILE_TYPES="-name \"*.mkv\" -o -name \"*.avi\" "
 
-
+#  for file in $(/opt/bin/find -L . \( ${FILE_TYPES} \))
 
 
 search(){
-  cd $movies
-  echo Find in $(pwd)
-  for file in $(/opt/bin/find -L . \( ${FILE_TYPES} \))
+  dir=$1
+  type=$2
+  echo "Find in "$dir  
+  for file in $(find $dir -type f -name "*.$type")
   do
 
     echo File: $file
@@ -18,4 +19,4 @@ search(){
   done
 }
 echo init
-search
+search $movies mkv
